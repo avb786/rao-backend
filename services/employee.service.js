@@ -49,16 +49,9 @@ const authenticate = async({ email, password, ipAddress }) => {
     // authentication successful so generate jwt and refresh tokens
     const jwtToken = await generateJwtToken(account);
 
-    // const refreshToken = generateRefreshToken(account, ipAddress);
-
-    // save refresh token
-    // await refreshToken.save();
-
-    // return basic details and tokens
     const data = {
         ...basicDetails(account),
-        jwtToken,
-        // refreshToken: refreshToken.token
+        jwtToken
     }
     return data;
 }

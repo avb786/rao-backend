@@ -10,16 +10,14 @@ const {
 } = require('../middleware/employee')
 
 console.log("ROUTES STARTED");
-
-
 router.post('/register', registerSchema, register);
-router.get('/getAll', getAll)
+router.get('/getAll', authorize, getAll)
 router.post('/authenticate', authenticateSchema, authenticate);
-router.post('/add-employee', addEmployee)
-router.put('/update-employee', updateEmployee)
-router.get('/getEmployeeById', getById)
+router.post('/add-employee', authorize, addEmployee)
+router.put('/update-employee',authorize, updateEmployee)
+router.get('/getEmployeeById',authorize, getById)
 router.get('/getAllEmployees',authorize, getAllEmployee)
-router.delete('/deleteEmployee', deleteEmployee)
+router.delete('/deleteEmployee', authorize, deleteEmployee)
 
 
 module.exports = router;

@@ -8,9 +8,7 @@ function authorize(req, res, next) {
       if(err) {
           responseGenerator(res, {}, 401, "Authentication Failed", true)
       }
-      console.log("Auth", req.headers.token);
       
-    console.log("cool", decoded) // bar
   });
 next()
 return
