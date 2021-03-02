@@ -19,7 +19,8 @@ const addEmployeeSchema = (req, res, next) => {
     const schema = Joi.object({
         firstName: Joi.string().required(),
         lastName: Joi.string().required(),
-        email: Joi.string().email().required()
+        email: Joi.string().email().required(),
+        
     });
     validateRequest(req, next, schema);
 }

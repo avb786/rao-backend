@@ -9,14 +9,14 @@ const authenticate = (req, res, next) => {
     employeeService.authenticate({ email, password, ipAddress })
         .then((response) => {
             setTokenCookie(res, response.jwtToken);
-            res.json(response);
+            responseGenerator(res, response, 200, 'Logged in successfully', true)
         })
         .catch(next);
 }
 const addEmployee = (req, res, next) => {
     employeeService.addEmployee(req.body).then((data) => responseGenerator(res, data, 200, 'Employee Added Successfully', false))
     .catch(err => {
-        responseGenerator(res, {}, 404, 'Error in Employee Added', true)
+        responseGenerator(res, {}, 400, 'Employee Already Added', true)
     })
 }
 
@@ -57,13 +57,14 @@ const getAllEmployee= (req, res, next) =>{
 }
 
 const deleteEmployee =(req, res, next) =>{
-    employeeService.deleteEmployee()
-        .then(accounts => responseGenerator(res, accounts, 200, 'Accounts Deleted Successfully', false))
+    employeeService.deleteEmployee(req.query)
+        .then(accounts => responseGenerator(res, accounts, 200, 'Account Deleted Successfully', false))
         .catch(next);
 }
 
 const getById = (req, res, next) =>{
-    employeeService.getById(req.params._id)
+    console.log('req.params._id', req.query);
+    employeeService.getById(req.query)
         .then(accounts => responseGenerator(res, accounts, 200, 'Accounts Fetch Successfully', false))
         .catch(next);
 }

@@ -6,7 +6,7 @@ const config = require("../config")
 
 const addEmployee = async(params) => {
     if (await global.db.EmployeeList.findOne({ email: params.email })) {
-        return "already registered";
+        throw new Error("already registered");
     }
     const account = new global.db.EmployeeList(params);
     account.save();
